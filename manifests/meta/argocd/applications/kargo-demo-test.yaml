@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/managed-by: helm-infra-argocd
     app.kubernetes.io/name: helm-infra-argocd
   annotations:
-    kargo.akuity.io/authorized-stage: "kargo-demo/test"
+    kargo.akuity.io/authorized-stage: "kargo-demo:test"
   name: kargo-demo-test
   namespace: infra-argocd
 spec:
