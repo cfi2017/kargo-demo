@@ -7,6 +7,7 @@ on:
     paths-ignore:
       - 'manifests/**'
       - 'charts/**'
+      - 'values/**'
 
 env:
   REGISTRY: ghcr.io
