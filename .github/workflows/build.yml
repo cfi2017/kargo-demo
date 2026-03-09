@@ -1,0 +1,45 @@
+name: Build and Push Container
+
+on:
+  push:
+    branches: [develop]
+    tags: ['*']
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: cfi2017/kargo-demo/server
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: DeterminateSystems/nix-installer-action@main
+
+      - uses: DeterminateSystems/magic-nix-cache-action@main
+
+      - name: Build copyToRegistry script
+        run: nix run .#container.copyToRegistry --dest-creds "${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}"
+
+      - name: Add additional tags
+        run: |
+          CREDS="--src-creds ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }} --dest-creds ${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}"
+          BASE="${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}"
+
+          # read the tag that was just pushed from the nix derivation
+          PUSHED=$(nix eval --raw .#container.imageTag)
+
+          if [[ "$GITHUB_REF" == refs/tags/* ]]; then
+            VERSION="${GITHUB_REF#refs/tags/}"
+            skopeo copy --insecure-policy $CREDS "docker://${BASE}:${PUSHED}" "docker://${BASE}:${VERSION}"
+            skopeo copy --insecure-policy $CREDS "docker://${BASE}:${PUSHED}" "docker://${BASE}:latest"
+          else
+            SHA="$(echo $GITHUB_SHA | head -c 7)"
+            skopeo copy --insecure-policy $CREDS "docker://${BASE}:${PUSHED}" "docker://${BASE}:develop"
+            skopeo copy --insecure-policy $CREDS "docker://${BASE}:${PUSHED}" "docker://${BASE}:sha-${SHA}"
+          fi
