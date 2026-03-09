@@ -1,0 +1,9 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: kargo-demo-qas
+  labels:
+    app.kubernetes.io/name: kargo-demo-qas
+    app.kubernetes.io/component: kargo-demo
+    pod-security.kubernetes.io/enforce: restricted
