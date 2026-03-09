@@ -54,9 +54,18 @@ spec:
           config:
             path: ${{ vars.tmpPath }}
         - uses: git-commit
+          as: commit
           config:
             path: ./repo
             message: "chore(${{ ctx.stage }}): update manifests"
         - uses: git-push
           config:
             path: ./repo
+        - uses: argocd-update
+          config:
+            apps:
+              - name: kargo-demo-${{ ctx.stage }}
+                sources:
+                  - repoURL: git@github.com:cfi2017/kargo-demo.git
+                    desiredRevision: ${{ outputs.commit.commit }}
+                    updateTargetRevision: true

@@ -1,0 +1,23 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  labels:
+    app.kubernetes.io/component: kargo-demo-prod
+    app.kubernetes.io/managed-by: helm-infra-argocd
+    app.kubernetes.io/name: helm-infra-argocd
+  annotations:
+    kargo.akuity.io/authorized-stage: "kargo-demo/prod"
+  name: kargo-demo-prod
+  namespace: infra-argocd
+spec:
+  destination:
+    namespace: kargo-demo-prod
+    server: https://kubernetes.default.svc
+  project: kargo-demo
+  source:
+    path: manifests/prod/
+    repoURL: https://github.com/cfi2017/kargo-demo.git
+    targetRevision: main
+  syncPolicy:
+    automated: {}
