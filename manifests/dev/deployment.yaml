@@ -28,11 +28,11 @@ spec:
       serviceAccountName: dev-demo
       containers:
         - name: demo
-          image: "ghcr.io/cfi2017/kargo-demo:develop@sha256:681c29ddd767b474dd59efd6296d56f6edb164c9fb08585751137304a6d4ff0c"
+          image: "ghcr.io/cfi2017/kargo-demo:develop@sha256:0fb3a49665e81182f4d2ce5f6e1931af19dda114bc21a65e6fc0e416db216ea6"
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
-              containerPort: 80
+              containerPort: 3000
               protocol: TCP
           livenessProbe:
             httpGet:

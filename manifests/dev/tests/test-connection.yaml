@@ -17,5 +17,5 @@ spec:
     - name: wget
       image: busybox
       command: ['wget']
-      args: ['dev-demo:80']
+      args: ['dev-demo:3000']
   restartPolicy: Never

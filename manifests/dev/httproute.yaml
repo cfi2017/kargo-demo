@@ -1,0 +1,27 @@
+---
+# Source: demo/templates/httproute.yaml
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: dev-demo
+  labels:
+    helm.sh/chart: demo-0.1.0
+    app.kubernetes.io/name: demo
+    app.kubernetes.io/instance: dev
+    app.kubernetes.io/version: "0.1.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  parentRefs:
+    - name: internal-apps
+      namespace: infra-kgateway
+  hostnames:
+    - kargo-demo-dev.int.swiss.dev
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /headers
+      backendRefs:
+        - name: dev-demo
+          port: 3000
+          weight: 1
