@@ -10,7 +10,7 @@ spec:
         imageSelectionStrategy: Digest
         constraint: develop
     - git:
-        repoURL: git@github.com:cfi2017/kargo-demo.git
+        repoURL: https://github.com/cfi2017/kargo-demo.git
         includePaths:
           - 'charts/**'
           - 'values/**'
@@ -27,7 +27,7 @@ spec:
         # match on semver
         repoURL: ghcr.io/cfi2017/kargo-demo/server
     - git:
-        repoURL: git@github.com:cfi2017/kargo-demo.git
+        repoURL: https://github.com/cfi2017/kargo-demo.git
         includePaths:
           - 'charts/**'
           - 'values/**'
