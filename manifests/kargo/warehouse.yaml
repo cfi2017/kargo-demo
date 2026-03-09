@@ -1,7 +1,7 @@
 apiVersion: kargo.akuity.io/v1alpha1
 kind: Warehouse
 metadata:
-  name: infra-repo
+  name: develop
   namespace: kargo-demo
 spec:
   subscriptions:
@@ -9,3 +9,15 @@ spec:
         repoURL: ghcr.io/cfi2017/kargo-demo/server
         imageSelectionStrategy: Digest
         constraint: develop
+---
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Warehouse
+metadata:
+  name: release
+  namespace: kargo-demo
+spec:
+  subscriptions:
+    - image:
+        # match on semver
+        repoURL: ghcr.io/cfi2017/kargo-demo/server
+
