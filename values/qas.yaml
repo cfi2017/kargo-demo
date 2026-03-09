@@ -1,0 +1,8 @@
+
+httpRoute:
+  enabled: true
+  parentRefs:
+    - name: internal-apps
+      namespace: infra-kgateway
+  hostnames:
+    - kargo-demo-qas.int.swiss.dev
