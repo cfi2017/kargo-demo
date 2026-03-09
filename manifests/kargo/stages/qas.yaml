@@ -12,7 +12,7 @@ spec:
   requestedFreight:
     - origin:
         kind: Warehouse
-        name: infra-repo
+        name: release
       sources:
         stages:
           - test
