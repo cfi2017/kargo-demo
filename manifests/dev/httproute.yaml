@@ -20,7 +20,7 @@ spec:
     - matches:
         - path:
             type: PathPrefix
-            value: /headers
+            value: /
       backendRefs:
         - name: dev-demo
           port: 3000
