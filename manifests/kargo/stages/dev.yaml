@@ -29,7 +29,7 @@ spec:
           config:
             repoURL: ${{ vars.gitopsRepo }}
             checkout:
-              - branch: main
+              - branch: develop
                 path: ./repo
         - uses: delete
           config:
@@ -40,9 +40,12 @@ spec:
             outPath: ${{ vars.tmpPath }}
             outLayout: helm
             releaseName: ${{ ctx.stage }}
+            setValues:
+              - key: image.tag
+                value: ${{ imageFrom("ghcr.io/cfi2017/kargo-demo/server", warehouse("develop")).Tag }}
         - uses: copy
           config:
-            inPath: ${{ vars.tmpPath }}/cluster-template/templates
+            inPath: ${{ vars.tmpPath }}/demo/templates
             outPath: ${{ vars.outPath }}
         - uses: delete
           config:
