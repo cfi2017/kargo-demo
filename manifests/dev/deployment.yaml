@@ -28,7 +28,7 @@ spec:
       serviceAccountName: dev-demo
       containers:
         - name: demo
-          image: "ghcr.io/cfi2017/kargo-demo:develop"
+          image: "ghcr.io/cfi2017/kargo-demo:develop@sha256:681c29ddd767b474dd59efd6296d56f6edb164c9fb08585751137304a6d4ff0c"
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
