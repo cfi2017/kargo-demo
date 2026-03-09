@@ -7,3 +7,5 @@ spec:
   subscriptions:
     - image:
         repoURL: ghcr.io/cfi2017/kargo-demo/server
+        imageSelectionStrategy: Digest
+        constraint: develop
