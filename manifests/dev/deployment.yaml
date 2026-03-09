@@ -31,12 +31,15 @@ spec:
       containers:
         - name: demo
           securityContext:
+            allowPrivilegeEscalation: false
             capabilities:
               drop:
               - ALL
             readOnlyRootFilesystem: true
             runAsNonRoot: true
             runAsUser: 1000
+            seccompProfile:
+              type: RuntimeDefault
           image: "ghcr.io/cfi2017/kargo-demo:develop@sha256:f82d0ee52e933a8ae5d56af054215de511a2a6dbb118fa66cd9b05616c628f2d"
           imagePullPolicy: IfNotPresent
           ports:
