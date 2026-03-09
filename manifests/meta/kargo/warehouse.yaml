@@ -10,10 +10,10 @@ spec:
         imageSelectionStrategy: Digest
         constraint: develop
     - git:
-        repoURL: https://github.com/cfi2017/kargo-demo.git
+        repoURL: git@github.com:cfi2017/kargo-demo.git
         includePaths:
-          - 'charts/**'
-          - 'values/**'
+          - 'glob:charts/**'
+          - 'glob:values/**'
         branch: develop
 ---
 apiVersion: kargo.akuity.io/v1alpha1
@@ -27,8 +27,8 @@ spec:
         # match on semver
         repoURL: ghcr.io/cfi2017/kargo-demo/server
     - git:
-        repoURL: https://github.com/cfi2017/kargo-demo.git
+        repoURL: git@github.com:cfi2017/kargo-demo.git
         includePaths:
-          - 'charts/**'
-          - 'values/**'
+          - 'glob:charts/**'
+          - 'glob:values/**'
         commitSelectionStrategy: SemVer
