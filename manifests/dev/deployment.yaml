@@ -26,9 +26,18 @@ spec:
         app.kubernetes.io/managed-by: Helm
     spec:
       serviceAccountName: dev-demo
+      securityContext:
+        fsGroup: 2000
       containers:
         - name: demo
-          image: "ghcr.io/cfi2017/kargo-demo:develop@sha256:0fb3a49665e81182f4d2ce5f6e1931af19dda114bc21a65e6fc0e416db216ea6"
+          securityContext:
+            capabilities:
+              drop:
+              - ALL
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 1000
+          image: "ghcr.io/cfi2017/kargo-demo:develop@sha256:f82d0ee52e933a8ae5d56af054215de511a2a6dbb118fa66cd9b05616c628f2d"
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
