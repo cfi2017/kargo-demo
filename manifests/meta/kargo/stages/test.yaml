@@ -66,6 +66,6 @@ spec:
             apps:
               - name: kargo-demo-${{ ctx.stage }}
                 sources:
-                  - repoURL: git@github.com:cfi2017/kargo-demo.git
+                  - repoURL: https://github.com/cfi2017/kargo-demo.git
                     desiredRevision: ${{ outputs.commit.commit }}
                     updateTargetRevision: true
