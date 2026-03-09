@@ -1,0 +1,57 @@
+apiVersion: kargo.akuity.io/v1alpha1
+kind: Stage
+metadata:
+  name: prod
+  namespace: kargo-demo
+  annotations:
+    kargo.akuity.io/color: "#FF0000"
+spec:
+  vars:
+    - name: gitopsRepo
+      value: git@github.com:cfi2017/kargo-demo.git
+  requestedFreight:
+    - origin:
+        kind: Warehouse
+        name: infra-repo
+      sources:
+        stages:
+          - qas
+  promotionTemplate:
+    spec:
+      vars:
+        - name: srcPath
+          value: ./repo/cluster-template
+        - name: outPath
+          value: ./repo/manifests/${{ ctx.stage }}
+        - name: tmpPath
+          value: ./out
+      steps:
+        - uses: git-clone
+          config:
+            repoURL: ${{ vars.gitopsRepo }}
+            checkout:
+              - branch: main
+                path: ./repo
+        - uses: delete
+          config:
+            path: ${{ vars.outPath }}
+        - uses: helm-template
+          config:
+            path: ${{ vars.srcPath }}
+            outPath: ${{ vars.tmpPath }}
+            outLayout: helm
+            releaseName: ${{ ctx.stage }}
+        - uses: copy
+          config:
+            inPath: ${{ vars.tmpPath }}/cluster-template/templates
+            outPath: ${{ vars.outPath }}
+        - uses: delete
+          config:
+            path: ${{ vars.tmpPath }}
+        - uses: git-commit
+          config:
+            path: ./repo
+            message: "chore(${{ ctx.stage }}): update manifests"
+        - uses: git-push
+          config:
+            path: ./repo
