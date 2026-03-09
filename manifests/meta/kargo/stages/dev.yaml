@@ -41,6 +41,8 @@ spec:
             outLayout: helm
             namespace: kargo-demo-${{ ctx.stage }}
             releaseName: ${{ ctx.stage }}
+            valueFiles:
+              - ./repo/values/dev.yaml
             setValues:
               - key: image.tag
                 value: develop@${{ imageFrom("ghcr.io/cfi2017/kargo-demo/server", warehouse("develop")).Digest }}
