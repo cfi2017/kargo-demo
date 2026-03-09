@@ -40,7 +40,7 @@ spec:
             runAsUser: 1000
             seccompProfile:
               type: RuntimeDefault
-          image: "ghcr.io/cfi2017/kargo-demo/server:develop@sha256:a7932fd4745418e1fb1fa547f600dc11965b97ccc4e68576b10c7fe73aaddc0f"
+          image: "ghcr.io/cfi2017/kargo-demo/server:develop@sha256:542f6cd9ddcff94e6da4d824c02e3b3eb08832e867eb992741579c0173282cdf"
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
