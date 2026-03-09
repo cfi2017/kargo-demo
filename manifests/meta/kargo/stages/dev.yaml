@@ -41,7 +41,7 @@ spec:
             outLayout: helm
             namespace: kargo-demo-${{ ctx.stage }}
             releaseName: ${{ ctx.stage }}
-            valueFiles:
+            valuesFiles:
               - ./repo/values/dev.yaml
             setValues:
               - key: image.tag

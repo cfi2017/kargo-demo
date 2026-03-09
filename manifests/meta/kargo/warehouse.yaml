@@ -9,6 +9,11 @@ spec:
         repoURL: ghcr.io/cfi2017/kargo-demo/server
         imageSelectionStrategy: Digest
         constraint: develop
+    - git:
+        repoURL: git@github.com:cfi2017/kargo-demo.git
+        includePaths:
+          - 'charts/**'
+        branch: develop
 ---
 apiVersion: kargo.akuity.io/v1alpha1
 kind: Warehouse
@@ -20,4 +25,8 @@ spec:
     - image:
         # match on semver
         repoURL: ghcr.io/cfi2017/kargo-demo/server
-
+    - git:
+        repoURL: git@github.com:cfi2017/kargo-demo.git
+        includePaths:
+          - 'charts/**'
+        commitSelectionStrategy: SemVer
