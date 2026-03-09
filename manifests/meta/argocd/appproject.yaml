@@ -1,0 +1,18 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: kargo-demo
+  namespace: infra-argocd
+  labels:
+    app.kubernetes.io/name: helm-infra-argocd
+    app.kubernetes.io/component: kargo-demo
+    app.kubernetes.io/managed-by: helm-infra-argocd
+spec:
+  description: deploy kargo-demo apps
+  destinations:
+    - namespace: kargo-demo-*
+      server: https://kubernetes.default.svc
+  sourceRepos:
+    - https://github.com/cfi2017/kargo-demo.git
+

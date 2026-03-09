@@ -13,6 +13,7 @@ spec:
         repoURL: git@github.com:cfi2017/kargo-demo.git
         includePaths:
           - 'charts/**'
+          - 'values/**'
         branch: develop
 ---
 apiVersion: kargo.akuity.io/v1alpha1
@@ -29,4 +30,5 @@ spec:
         repoURL: git@github.com:cfi2017/kargo-demo.git
         includePaths:
           - 'charts/**'
+          - 'values/**'
         commitSelectionStrategy: SemVer
