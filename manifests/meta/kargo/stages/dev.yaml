@@ -39,6 +39,7 @@ spec:
             path: ${{ vars.srcPath }}
             outPath: ${{ vars.tmpPath }}
             outLayout: helm
+            namespace: kargo-demo-${{ ctx.stage }}
             releaseName: ${{ ctx.stage }}
             setValues:
               - key: image.tag
