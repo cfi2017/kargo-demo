@@ -8,13 +8,13 @@ spec:
     - image:
         repoURL: ghcr.io/cfi2017/kargo-demo/server
         imageSelectionStrategy: Digest
-        constraint: develop
+        constraint: main
     - git:
         repoURL: git@github.com:cfi2017/kargo-demo.git
         includePaths:
           - 'glob:charts/**'
           - 'glob:values/**'
-        branch: develop
+        branch: main
 ---
 apiVersion: kargo.akuity.io/v1alpha1
 kind: Warehouse
