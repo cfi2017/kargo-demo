@@ -18,6 +18,6 @@ spec:
   source:
     path: manifests/dev/
     repoURL: https://github.com/cfi2017/kargo-demo.git
-    targetRevision: develop
+    targetRevision: main
   syncPolicy:
     automated: {}

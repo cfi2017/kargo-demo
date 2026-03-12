@@ -2,12 +2,18 @@ name: Build and Push Container
 
 on:
   push:
-    branches: [develop]
+    branches: [main]
     tags: ['*']
     paths-ignore:
       - 'manifests/**'
       - 'charts/**'
       - 'values/**'
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: 'Ref to build (tag or branch)'
+        required: false
+        default: ''
 
 env:
   REGISTRY: ghcr.io
@@ -44,6 +50,6 @@ jobs:
             skopeo copy --insecure-policy $CREDS "docker://${BASE}:${PUSHED}" "docker://${BASE}:latest"
           else
             SHA="$(echo $GITHUB_SHA | head -c 7)"
-            skopeo copy --insecure-policy $CREDS "docker://${BASE}:${PUSHED}" "docker://${BASE}:develop"
+            skopeo copy --insecure-policy $CREDS "docker://${BASE}:${PUSHED}" "docker://${BASE}:main"
             skopeo copy --insecure-policy $CREDS "docker://${BASE}:${PUSHED}" "docker://${BASE}:sha-${SHA}"
           fi

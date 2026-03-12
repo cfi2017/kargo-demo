@@ -29,7 +29,7 @@ spec:
           config:
             repoURL: ${{ vars.gitopsRepo }}
             checkout:
-              - branch: develop
+              - branch: main
                 path: ./repo
         - uses: delete
           config:
@@ -45,7 +45,7 @@ spec:
               - ./repo/values/dev.yaml
             setValues:
               - key: image.tag
-                value: develop@${{ imageFrom("ghcr.io/cfi2017/kargo-demo/server", warehouse("develop")).Digest }}
+                value: main@${{ imageFrom("ghcr.io/cfi2017/kargo-demo/server", warehouse("develop")).Digest }}
         - uses: copy
           config:
             inPath: ${{ vars.tmpPath }}/demo/templates
