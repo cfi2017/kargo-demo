@@ -33,6 +33,11 @@ jobs:
 
       - uses: DeterminateSystems/magic-nix-cache-action@main
 
+      - uses: cachix/cachix-action@v15
+        with:
+          name: cfi2017
+          authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
+
       - name: Build copyToRegistry script
         run: nix run .#container.copyToRegistry -- --dest-creds "${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}"
 
