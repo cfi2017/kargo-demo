@@ -6,3 +6,5 @@ httpRoute:
       namespace: infra-kgateway
   hostnames:
     - kargo-demo.int.swiss.dev
+
+env: Production
