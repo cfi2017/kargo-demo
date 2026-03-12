@@ -9,6 +9,9 @@ spec:
   vars:
     - name: gitopsRepo
       value: git@github.com:cfi2017/kargo-demo.git
+  verification:
+    analysisTemplates:
+      - templateName: smoke-test
   requestedFreight:
     - origin:
         kind: Warehouse

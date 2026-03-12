@@ -1,0 +1,12 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: smoke-test
+  namespace: kargo-demo
+spec:
+  metrics:
+    - name: hello-kargo
+      provider:
+        web:
+          url: http://test-demo.kargo-demo-test.svc.cluster.local:3000
+      successCondition: result == "Hello, Kargo!"
