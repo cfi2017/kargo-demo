@@ -41,6 +41,9 @@ spec:
             seccompProfile:
               type: RuntimeDefault
           image: "ghcr.io/cfi2017/kargo-demo/server:main@sha256:e82001400f14ef42acd860322ff345aa85486c19eb4c977f2a089a032627e4f2"
+          env:
+            - name: ENVIRONMENT
+              value: Development
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
