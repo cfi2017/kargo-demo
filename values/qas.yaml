@@ -6,3 +6,5 @@ httpRoute:
       namespace: infra-kgateway
   hostnames:
     - kargo-demo-qas.int.swiss.dev
+
+env: QAS

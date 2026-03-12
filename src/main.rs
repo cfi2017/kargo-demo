@@ -1,3 +1,4 @@
+use std::env;
 use axum::{
     routing::{get},
     Router,
@@ -19,6 +20,7 @@ async fn main() {
     axum::serve(listener, app).await;
 }
 
-async fn root() -> &'static str {
-    "Hello, Kargo!"
+async fn root() -> String {
+    let environment = env::var("ENVIRONMENT").unwrap_or_else(|_| "Kargo".to_string());
+    format!("Hello, {}!", environment)
 }
