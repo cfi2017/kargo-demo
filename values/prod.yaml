@@ -2,7 +2,7 @@
 httpRoute:
   enabled: true
   parentRefs:
-    - name: public-apps
+    - name: internal-apps
       namespace: infra-kgateway
   hostnames:
-    - kargo-demo.k8s.swiss.dev
+    - kargo-demo.int.swiss.dev
