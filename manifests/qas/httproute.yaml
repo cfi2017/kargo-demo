@@ -1,0 +1,27 @@
+---
+# Source: demo/templates/httproute.yaml
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: qas-demo
+  labels:
+    helm.sh/chart: demo-0.1.0
+    app.kubernetes.io/name: demo
+    app.kubernetes.io/instance: qas
+    app.kubernetes.io/version: "0.1.0"
+    app.kubernetes.io/managed-by: Helm
+spec:
+  parentRefs:
+    - name: internal-apps
+      namespace: infra-kgateway
+  hostnames:
+    - kargo-demo-qas.int.swiss.dev
+  rules:
+    - matches:
+        - path:
+            type: PathPrefix
+            value: /
+      backendRefs:
+        - name: qas-demo
+          port: 3000
+          weight: 1
