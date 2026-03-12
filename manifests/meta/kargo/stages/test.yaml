@@ -11,7 +11,8 @@ spec:
       value: git@github.com:cfi2017/kargo-demo.git
   verification:
     analysisTemplates:
-      - templateName: smoke-test
+      - name: smoke-test
+        kind: AnalysisTemplate
   requestedFreight:
     - origin:
         kind: Warehouse
